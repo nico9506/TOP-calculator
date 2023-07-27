@@ -1,5 +1,11 @@
 :root {
-
+    --ct-smoky-black: #0b0a07;
+    --ct-numbers: #cecece;
+    --ct-signs: #cb7e7e;
+    --ct-flax: #E3D87E;
+    --ct-icterine: #F0EC57;
+    --ct-numix: #d64937;
+    --ct-dark-grey: #313131;
 }
 
 * {
@@ -15,6 +21,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--ct-dark-grey);
 }
 
 .frame {
@@ -25,6 +32,8 @@ html {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    background-color: var(--ct-smoky-black);
+    color: var(--ct-numbers);
 }
 
 .container {
@@ -47,7 +56,8 @@ html {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    background-color: beige;
+    background-color: var(--ct-flax);
+    color: var(--ct-smoky-black);
     padding: 0.5rem;
     font-size: 2rem;
 }
@@ -66,8 +76,22 @@ button {
     border-radius: 0;
     border-style: none;
     /* font-weight: bold; */
+    background-color: var(--ct-numbers);
+}
+
+.function-btn, .sign-btn {
+    font-weight: bolder;
+}
+
+.function-btn {
+    background-color: var(--ct-numix);
+}
+
+.sign-btn {
+    background-color: var(--ct-signs);
 }
 
 button:hover {
-    background-color: chartreuse;
+    background-color: var(--ct-icterine);
+    font-weight: bolder;
 }
