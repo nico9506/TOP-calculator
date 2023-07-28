@@ -1,8 +1,9 @@
+let history = document.getElementById("history");
 let display = document.getElementById("display");
+
 let total = ""; //keeps the last input value or the last calculated value
 let lastOperator = "";
-let isResultDisplayed = false; //Flag to know if the numeric value comes from
-    // a calculation
+let isOperatorSelected = false;
 
 const buttonsArray = [...document.querySelectorAll("button")];
 
@@ -11,29 +12,12 @@ buttonsArray.forEach((btn) => {
 });
 
 function updateDisplay() {
-    // Finish the function in case the number has more than 14 digits
-    if (display.textContent.length > 14) return;
-
-    // Numeric buttons functionality
-    const digitPattern = /\D/gi; //Regex to find a non-digit character\
-
-    if (
-        this.classList.contains("digit-btn") &&
-        !digitPattern.test(display.textContent) &&
-        !isResultDisplayed
-    ) {
-        display.textContent += this.textContent;
-    } else if (this.classList.contains("digit-btn")) {
-        display.textContent = this.textContent;
-        isResultDisplayed = false;
-    }
-
     //Function buttons functionalities
     switch (this.id) {
         case "ac-btn":
+            history.textContent = " ";
             display.textContent = "";
             total = "";
-            isResultDisplayed = false;
             break;
 
         case "del-btn":
@@ -45,28 +29,54 @@ function updateDisplay() {
             break;
 
         case "divide-btn":
+            if (display.textContent.length < 1) break;
+            if (lastOperator.length < 1) lastOperator = "/";
+            total == ""
+                ? (total = Number(display.textContent))
+                : calculateTotal(lastOperator);
+
+            lastOperator = this.textContent;
+            history.textContent = total + " " + lastOperator;
+            display.textContent = "";
+
             break;
 
         case "mult-btn":
+            if (display.textContent.length < 1) break;
+            if (lastOperator.length < 1) lastOperator = "X";
+            total == ""
+                ? (total = Number(display.textContent))
+                : calculateTotal(lastOperator);
+
+            lastOperator = this.textContent;
+            history.textContent = total + " " + lastOperator;
+            display.textContent = "";
+
             break;
 
         case "minus-btn":
+            if (display.textContent.length < 1) break;
+            if (lastOperator.length < 1) lastOperator = "-";
+            total == ""
+                ? (total = Number(display.textContent))
+                : calculateTotal(lastOperator);
+
+            lastOperator = this.textContent;
+            history.textContent = total + " " + lastOperator;
+            display.textContent = "";
+
             break;
 
         case "plus-btn":
-            if (
-                typeof total == "number" &&
-                Number(display.textContent) != NaN &&
-                isResultDisplayed
-            ) {
-                display.textContent = total + Number(display.textContent);
-                total = Number(display.textContent);
-                isResultDisplayed = true;
-            } else {
-                total = Number(display.textContent);
-                // display.textContent = "+";
-                isResultDisplayed = true;
-            }
+            if (display.textContent.length < 1) break;
+            if (lastOperator.length < 1) lastOperator = "+";
+            total == ""
+                ? (total = Number(display.textContent))
+                : calculateTotal(lastOperator);
+
+            lastOperator = this.textContent;
+            history.textContent = total + " " + lastOperator;
+            display.textContent = "";
 
             break;
 
@@ -74,10 +84,48 @@ function updateDisplay() {
             break;
 
         case "equal-btn":
+            calculateTotal(lastOperator);
+            lastOperator = "";
+            history.textContent = total;
+            display.textContent = "";
             break;
 
         case "extra-btn":
             console.log("Extra Button");
+            break;
+
+        default:
+            break;
+    }
+
+    // Finish the function in case the number has more than 14 digits
+    if (display.textContent.length > 14) return;
+
+    if (this.classList.contains("digit-btn")) {
+        display.textContent += this.textContent;
+    }
+}
+
+function calculateTotal(operator) {
+    switch (operator) {
+        case "+":
+            total += Number(display.textContent);
+            break;
+
+        case "-":
+            total -= Number(display.textContent);
+            break;
+
+        case "X":
+            total *= Number(display.textContent);
+            break;
+
+        case "/":
+            if (display.textContent == "0") {
+                history.textContent = "Error";
+            } else {
+                total /= Number(display.textContent);
+            }
             break;
 
         default:

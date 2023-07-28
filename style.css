@@ -53,13 +53,26 @@ html {
 .display {
     height: 15%;
     width: 19.2rem;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    display: block;
+    text-align: right;
     background-color: var(--ct-flax);
     color: var(--ct-smoky-black);
     padding: 0.5rem;
     font-size: 2rem;
+}
+
+#history {
+    height: 40%;
+    color: var(--ct-dark-grey);
+    font-size: 1.6rem;
+}
+
+#display {
+    height: 60%;
+}
+
+#history, #display {
+    width: 100%;
 }
 
 .container-buttons {
