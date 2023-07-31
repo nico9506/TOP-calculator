@@ -68,6 +68,14 @@ function updateDisplay() {
             break;
 
         case "decimal-btn":
+            if (display.textContent.includes(".")) {
+                break;
+            } else {
+                display.textContent.length < 1
+                    ? (display.textContent = "0.")
+                    : (display.textContent += ".");
+            }
+
             break;
 
         case "equal-btn":
