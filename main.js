@@ -3,7 +3,7 @@ let display = document.getElementById("display");
 
 let total = ""; //keeps the last input value or the last calculated value
 let lastOperator = "";
-let isOperatorSelected = false;
+let stateError = false;
 
 const buttonsArray = [...document.querySelectorAll("button")];
 
@@ -15,7 +15,8 @@ function updateDisplay() {
     //Function buttons functionalities
     switch (this.id) {
         case "ac-btn":
-            history.textContent = " ";
+            activateAllButtons();
+            history.textContent = "";
             display.textContent = "";
             total = "";
             break;
@@ -29,54 +30,40 @@ function updateDisplay() {
             break;
 
         case "divide-btn":
-            if (display.textContent.length < 1) break;
-            if (lastOperator.length < 1) lastOperator = "/";
-            total == ""
-                ? (total = Number(display.textContent))
-                : calculateTotal(lastOperator);
-
+            if (display.textContent.length < 1 && history.textContent == "")
+                break;
+            cleanAndCallUpdate();
             lastOperator = this.textContent;
             history.textContent = total + " " + lastOperator;
-            display.textContent = "";
 
             break;
 
         case "mult-btn":
-            if (display.textContent.length < 1) break;
-            if (lastOperator.length < 1) lastOperator = "X";
-            total == ""
-                ? (total = Number(display.textContent))
-                : calculateTotal(lastOperator);
-
+            if (display.textContent.length < 1 && history.textContent == "")
+                break;
+            cleanAndCallUpdate();
             lastOperator = this.textContent;
             history.textContent = total + " " + lastOperator;
-            display.textContent = "";
 
             break;
 
         case "minus-btn":
-            if (display.textContent.length < 1) break;
-            if (lastOperator.length < 1) lastOperator = "-";
-            total == ""
-                ? (total = Number(display.textContent))
-                : calculateTotal(lastOperator);
-
+            if (display.textContent.length < 1 && history.textContent == "")
+                break;
+            cleanAndCallUpdate();
             lastOperator = this.textContent;
             history.textContent = total + " " + lastOperator;
-            display.textContent = "";
+
+            break;
 
             break;
 
         case "plus-btn":
-            if (display.textContent.length < 1) break;
-            if (lastOperator.length < 1) lastOperator = "+";
-            total == ""
-                ? (total = Number(display.textContent))
-                : calculateTotal(lastOperator);
-
+            if (display.textContent.length < 1 && history.textContent == "")
+                break;
+            cleanAndCallUpdate();
             lastOperator = this.textContent;
             history.textContent = total + " " + lastOperator;
-            display.textContent = "";
 
             break;
 
@@ -85,9 +72,13 @@ function updateDisplay() {
 
         case "equal-btn":
             calculateTotal(lastOperator);
+            if (stateError) {
+                deactivateButtons("ac-btn");
+            }
             lastOperator = "";
             history.textContent = total;
             display.textContent = "";
+
             break;
 
         case "extra-btn":
@@ -122,7 +113,8 @@ function calculateTotal(operator) {
 
         case "/":
             if (display.textContent == "0") {
-                history.textContent = "Error";
+                total = "Error: #DIV/0!";
+                stateError = true;
             } else {
                 total /= Number(display.textContent);
             }
@@ -131,4 +123,36 @@ function calculateTotal(operator) {
         default:
             break;
     }
+}
+
+function cleanAndCallUpdate() {
+    /**
+     * Auxiliary function to avoid repeating this code within updateDisplay()
+     */
+    if (lastOperator == "" && display.textContent == "") {
+        total = Number(history.textContent);
+    } else if (lastOperator == "") total = Number(display.textContent);
+
+    total == ""
+        ? display.textContent == ""
+            ? (total = "")
+            : (total = Number(display.textContent))
+        : calculateTotal(lastOperator);
+    display.textContent = "";
+}
+
+function deactivateButtons(exception) {
+    buttonsArray.forEach((btn) => {
+        if (btn.id !== exception) {
+            btn.disabled = true;
+        }
+    });
+}
+
+function activateAllButtons() {
+    buttonsArray.forEach((btn) => {
+        btn.disabled = false;
+    });
+
+    stateError = false;
 }
