@@ -27,6 +27,9 @@ function updateDisplay() {
             break;
 
         case "percent-btn":
+            if (display.textContent.length < 1 && history.textContent == "")
+                break;
+            calculatePercentage();
             break;
 
         case "divide-btn":
@@ -56,8 +59,6 @@ function updateDisplay() {
 
             break;
 
-            break;
-
         case "plus-btn":
             if (display.textContent.length < 1 && history.textContent == "")
                 break;
@@ -80,9 +81,7 @@ function updateDisplay() {
 
         case "equal-btn":
             calculateTotal(lastOperator);
-            if (stateError) {
-                deactivateButtons("ac-btn");
-            }
+
             lastOperator = "";
             history.textContent = total;
             display.textContent = "";
@@ -97,9 +96,11 @@ function updateDisplay() {
             break;
     }
 
-    // Finish the function in case the number has more than 14 digits
+    // Do not permit to write more than 14 digits in order to keep the values
+    // within the display screen.
     if (display.textContent.length > 14) return;
 
+    // used to write (concatenate) numbers
     if (this.classList.contains("digit-btn")) {
         display.textContent += this.textContent;
     }
@@ -129,8 +130,13 @@ function calculateTotal(operator) {
             break;
 
         default:
+            display.textContent.length < 1
+                ? (total = Number(history.textContent))
+                : (total = Number(display.textContent));
             break;
     }
+
+    if (stateError) deactivateButtons("ac-btn");
 }
 
 function cleanAndCallUpdate() {
@@ -147,6 +153,15 @@ function cleanAndCallUpdate() {
             : (total = Number(display.textContent))
         : calculateTotal(lastOperator);
     display.textContent = "";
+}
+
+function calculatePercentage() {
+    if (lastOperator == "+" || lastOperator == "-") {
+        history.textContent = (total / 100) * Number(display.textContent);
+        display.textContent = "";
+    } else {
+        display.textContent = Number(display.textContent) / 100;
+    }
 }
 
 function deactivateButtons(exception) {
