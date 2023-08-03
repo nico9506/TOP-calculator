@@ -3,7 +3,7 @@ let display = document.getElementById("display");
 
 let total = ""; //keeps the last input value or the last calculated value
 let lastOperator = "";
-let stateError = false;
+let stateError = false; // used to know there's a div/0 error and print a msg
 
 const buttonsArray = [...document.querySelectorAll("button")];
 
@@ -89,7 +89,7 @@ function updateDisplay() {
             break;
 
         case "extra-btn":
-            console.log("Extra Button");
+            display.textContent = Math.random().toFixed(2);
             break;
 
         default:

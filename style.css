@@ -43,6 +43,15 @@ html {
     align-items: center;
 }
 
+.container h3 a {
+    color: var(--ct-numbers);
+    text-decoration: none;
+}
+
+.container h3 a:hover {
+    color: var(--ct-numix)
+}
+
 .brand {
     height: 10%;
     display: flex;
@@ -64,7 +73,8 @@ html {
 #history {
     height: 40%;
     color: var(--ct-dark-grey);
-    font-size: 1.6rem;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 #display {
@@ -88,8 +98,8 @@ button {
     font-size: 1.5rem;
     border-radius: 0;
     border-style: none;
-    /* font-weight: bold; */
     background-color: var(--ct-numbers);
+    transition: background-color 0.3s;
 }
 
 .function-btn, .sign-btn {

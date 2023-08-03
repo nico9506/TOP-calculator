@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="frame">
-        <div class="container brand">
-            <h1>KAZIOOO</h1>
-            <h2>nico9506</h2>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Calculator</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <script
+            src="https://kit.fontawesome.com/8b9c8ab9d4.js"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body>
+        <div class="frame">
+            <div class="container brand">
+                <h1>KAZIOOO</h1>
+                <h3>
+                    <a
+                        href="https://github.com/nico9506/foundations-calculator"
+                        target="_blank"
+                        ><i class="fa-brands fa-github"></i> nico9506</a
+                    >
+                </h3>
+            </div>
+
+            <div class="container display">
+                <p id="history"></p>
+                <p id="display"></p>
+            </div>
+
+            <div class="container container-buttons">
+                <button id="ac-btn" class="function-btn">AC</button>
+                <button id="del-btn" class="function-btn">DEL</button>
+                <button id="percent-btn" class="sign-btn">%</button>
+                <button id="divide-btn" class="sign-btn">/</button>
+                <button id="seven-btn" class="digit-btn">7</button>
+                <button id="eigth" class="digit-btn">8</button>
+                <button id="nine-btn" class="digit-btn">9</button>
+                <button id="mult-btn" class="sign-btn">X</button>
+                <button id="four-btn" class="digit-btn">4</button>
+                <button id="five-btn" class="digit-btn">5</button>
+                <button id="six-btn" class="digit-btn">6</button>
+                <button id="minus-btn" class="sign-btn">-</button>
+                <button id="one-btn" class="digit-btn">1</button>
+                <button id="two-btn" class="digit-btn">2</button>
+                <button id="three-btn" class="digit-btn">3</button>
+                <button id="plus-btn" class="sign-btn">+</button>
+                <button id="extra-btn" class="extra-btn">
+                    <i class="fa-solid fa-dice"></i>
+                </button>
+                <button id="zero-btn" class="digit-btn">0</button>
+                <button id="decimal-btn" class="dec-btn">.</button>
+                <button id="equal-btn" class="function-btn">=</button>
+            </div>
         </div>
 
-        <div class="container display">
-            <p id="history"> </p>
-            <p id="display"></p>
-        </div>
-
-        <div class="container container-buttons">
-            <button id="ac-btn" class="function-btn">AC</button>
-            <button id="del-btn" class="function-btn">DEL</button>
-            <button id="percent-btn" class="sign-btn">%</button>
-            <button id="divide-btn" class="sign-btn">/</button>
-            <button id="seven-btn" class="digit-btn">7</button>
-            <button id="eigth" class="digit-btn">8</button>
-            <button id="nine-btn" class="digit-btn">9</button>
-            <button id="mult-btn" class="sign-btn">X</button>
-            <button id="four-btn" class="digit-btn">4</button>
-            <button id="five-btn" class="digit-btn">5</button>
-            <button id="six-btn" class="digit-btn">6</button>
-            <button id="minus-btn" class="sign-btn">-</button>
-            <button id="one-btn" class="digit-btn">1</button>
-            <button id="two-btn" class="digit-btn">2</button>
-            <button id="three-btn" class="digit-btn">3</button>
-            <button id="plus-btn" class="sign-btn">+</button>
-            <button id="extra-btn" class="extra-btn">??</button>
-            <button id="zero-btn" class="digit-btn">0</button>
-            <button id="decimal-btn" class="dec-btn">.</button>
-            <button id="equal-btn" class="function-btn">=</button>
-        </div>
-    </div>
-    
-    <script src="main.js"></script>
-</body>
+        <script src="main.js"></script>
+    </body>
 </html>
